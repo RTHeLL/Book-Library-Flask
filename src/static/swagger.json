@@ -1,0 +1,533 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "description": "Books Library by Kinder",
+    "version": "1.0.5",
+    "title": "Books Library SWAGGER",
+    "contact": {
+      "email": "k1ndermail@ya.ru"
+    }
+  },
+  "servers": [
+    {
+      "url": "/"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Book request",
+      "description": "Example API for requesting"
+    }
+  ],
+  "paths": {
+    "/books": {
+      "get": {
+        "tags": [
+          "Book request"
+        ],
+        "summary": "Return all books",
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "schema": {
+              "$ref": "#/components/schemas/booksResponse"
+            }
+          }
+        }
+      },
+      "post": {
+       "summary": "Create a new book",
+        "tags": [
+          "Book request"
+        ],
+        "requestBody": {
+          "description": "Book request post object",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/books"
+              }
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "201": {
+            "description": "Ok",
+            "schema": {
+              "$ref": "#/components/schemas/uid"
+            }
+          },
+          "400": {
+            "description": "Error. Wrong data."
+          }
+        }
+      }
+    },
+    "/authors": {
+      "get": {
+        "tags": [
+          "Author request"
+        ],
+        "summary": "Return all authors",
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "schema": {
+              "$ref": "#/components/schemas/authorsResponse"
+            }
+          }
+        }
+      },
+      "post": {
+       "summary": "Add a new author",
+        "tags": [
+          "Author request"
+        ],
+        "requestBody": {
+          "description": "Author request post object",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/authors"
+              }
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "201": {
+            "description": "Ok",
+            "schema": {
+              "$ref": "#/components/schemas/uid"
+            }
+          },
+          "400": {
+            "description": "Error. Wrong data."
+          }
+        }
+      }
+    },
+    "/books/{uid}": {
+      "get": {
+        "tags": [
+          "Book request"
+        ],
+        "summary": "Get book by UID",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "uid",
+            "description": "Book request uid",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/uid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "schema": {
+              "$ref": "#/components/schemas/book"
+            }
+          },
+          "400": {
+            "description": "Error. Wrong data."
+          },
+          "404": {
+            "description": "Error. Book was not found"
+          }
+        }
+      },
+      "put": {
+        "summary": "Edit a book request by uid",
+        "tags": [
+          "Book request"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "uid",
+            "description": "Book request uid",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/uid"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Book request Object",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/book"
+              }
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "schema": {
+              "$ref": "#/components/schemas/book"
+            }
+          },
+          "400": {
+            "description": "Error. Wrong Data."
+          }
+        }
+      },
+      "patch": {
+        "summary": "Edit a book request by uid",
+        "tags": [
+          "Book request"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "uid",
+            "description": "Book request uid",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/uid"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Book request Object",
+          "required": false,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/book"
+              }
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "schema": {
+              "$ref": "#/components/schemas/book"
+            }
+          },
+          "400": {
+            "description": "Error. Wrong Data."
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete book request by UID",
+        "tags": [
+          "Book request"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "uid",
+            "required": true,
+            "description": "Book request by UID",
+            "scheme": {
+              "$ref": "#/components/schemas/uid"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Ok",
+            "schema": {
+              "$ref": "#/components/schemas/uid"
+            }
+          },
+          "400": {
+            "description": "Error. 400"
+          },
+          "404": {
+            "description": "Error. Book was not found"
+          }
+        }
+      }
+    },
+    "/authors/{uid}": {
+      "get": {
+        "tags": [
+          "Author request"
+        ],
+        "summary": "Get author by UID",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "uid",
+            "description": "Author request uid",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/uid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "schema": {
+              "$ref": "#/components/schemas/author"
+            }
+          },
+          "400": {
+            "description": "Error. Wrong data."
+          },
+          "404": {
+            "description": "Error. Author was not found"
+          }
+        }
+      },
+      "put": {
+        "summary": "Edit a author request by uid",
+        "tags": [
+          "Author request"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "uid",
+            "description": "Author request uid",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/uid"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Author request Object",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/author"
+              }
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "schema": {
+              "$ref": "#/components/schemas/author"
+            }
+          },
+          "400": {
+            "description": "Error. Wrong Data."
+          }
+        }
+      },
+      "path": {
+        "summary": "Edit a author request by uid",
+        "tags": [
+          "Author request"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "uid",
+            "description": "Author request uid",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/uid"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Author request Object",
+          "required": false,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/author"
+              }
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "schema": {
+              "$ref": "#/components/schemas/author"
+            }
+          },
+          "400": {
+            "description": "Error. Wrong Data."
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete author request by UID",
+        "tags": [
+          "Author request"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "uid",
+            "required": true,
+            "description": "Author request by UID",
+            "scheme": {
+              "$ref": "#/components/schemas/uid"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Ok",
+            "schema": {
+              "$ref": "#/components/schemas/uid"
+            }
+          },
+          "400": {
+            "description": "Error. 400"
+          },
+          "404": {
+            "description": "Error. Author was not found"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "uid": {
+        "properties": {
+          "uid": {
+            "type": "string"
+          }
+        }
+      },
+      "books": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "format": "string"
+          },
+          "release_date": {
+            "type": "string",
+            "format": "string"
+          },
+          "distributed_by": {
+            "type": "string",
+            "format": "string"
+          },
+          "description": {
+            "type": "string",
+            "format": "string"
+          },
+          "rating": {
+            "type": "number"
+          },
+          "length": {
+            "type": "number"
+          }
+        }
+      },
+      "authors": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "format": "string"
+          },
+          "birthday": {
+            "type": "string",
+            "format": "string"
+          },
+          "is_active": {
+            "type": "number"
+          }
+        }
+      },
+      "book": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "format": "string"
+          },
+          "release_date": {
+            "type": "string",
+            "format": "string"
+          },
+          "distributed_by": {
+            "type": "string",
+            "format": "string"
+          },
+          "description": {
+            "type": "string",
+            "format": "string"
+          },
+          "rating": {
+            "type": "number"
+          },
+          "length": {
+            "type": "number"
+          }
+        }
+      },
+      "author": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "format": "string"
+          },
+          "birthday": {
+            "type": "string",
+            "format": "string"
+          },
+          "is_active": {
+            "type": "number"
+          }
+        }
+      },
+      "booksResponse": {
+        "type": "object",
+        "properties": {
+          "bookRequest": {
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/book"
+            }
+          }
+        }
+      },
+      "authorsResponse": {
+        "type": "object",
+        "properties": {
+          "bookRequest": {
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/author"
+            }
+          }
+        }
+      }
+    }
+  }
+}
