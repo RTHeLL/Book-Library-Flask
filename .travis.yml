@@ -1,8 +1,16 @@
 language: python
 python:
   - 3.8.5
-
+cache:
+  - pip
+  - directories:
+    - $HOME/.pyenv_cache
 before_install:
+  - |
+    if [[ -n "$PYENV_VERSION" ]]; then
+      wget https://github.com/praekeltfoundation/travis-pyenv/releases/download/0.4.0/setup-pyenv.sh
+      source setup-pyenv.sh
+    fi
   - pip install pycodestyle
 
 install:
@@ -11,4 +19,4 @@ install:
 script:
   - pytest
   - coverage run --source="src/" -m pytest
-  - pycodestyle src/ --ignore=E755, E501, E402
+  - pycodestyle src/ --ignore=E755,E501,E402
