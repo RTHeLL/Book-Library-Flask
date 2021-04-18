@@ -42,7 +42,6 @@ class AuthorListApi(Resource):
         db.session.commit()
         return self.author_schema.dump(author), 200
 
-
     def patch(self, uid):
         author = db.session.query(Author).filter_by(id=uid).first()
         if not author:
