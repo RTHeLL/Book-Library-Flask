@@ -52,4 +52,4 @@ RUN chown -R userapi:userapi ./
 USER userapi
 
 EXPOSE 5000
-CMD ["python", "./wsgi.py"]
+CMD ["gunicorn", "-b0.0.0.0:8000", "wsgi:app"]
