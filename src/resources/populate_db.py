@@ -133,12 +133,12 @@ class PopulateDBWithPoolExecutor(Resource):
         except AttributeError:
             length = 0
         return {
-                'title': title,
-                'rating': rating,
-                'description': description,
-                'distributed_by': distributed_by,
-                'release_date': release_date,
-                'length': length
+            'title': title,
+            'rating': rating,
+            'description': description,
+            'distributed_by': distributed_by,
+            'release_date': release_date,
+            'length': length
         }
 
     @staticmethod
