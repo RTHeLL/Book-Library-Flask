@@ -19,4 +19,4 @@ install:
 script:
   - pytest
   - coverage run --source="src/" -m pytest
-  - pycodestyle src/ --ignore=E755,E501,E402
+  - pycodestyle src/ --ignore=E722,E501,E402
